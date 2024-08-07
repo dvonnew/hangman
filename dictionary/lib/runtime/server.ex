@@ -1,6 +1,7 @@
 defmodule Dictionary.Runtime.Server do
 
   @type t :: pid()
+
   @me __MODULE__
 
   use Agent
@@ -12,7 +13,7 @@ defmodule Dictionary.Runtime.Server do
   end
 
   def random_word() do
-    if :rand.uniform < 0.33 do
+    if :rand.uniform < 0.1 do
       Agent.get(@me, fn _ -> exit(:boom) end)
     end
     Agent.get(@me , &WordList.random_word/1)
